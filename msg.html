@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="clearCSS.css">
+	<style type="text/css">
+		html,body{
+			width: 100%;
+			height: 100%;
+		}
+		body{
+			
+			background-size: cover;
+		}
+		/*左边部分*/
+		#left{
+			width:35%;
+			height: 100%;
+			background:rgba(0,15,0,0.9);
+			float: left;			
+		}		
+		/*音乐*/
+		#left #music{
+			width: 100%;
+			height: 92%;
+			position:relative;	
+			display: none;		
+		}
+		#left #music ul{
+			display: block;
+			background:none;
+			position: absolute;
+		}
+		#left #music ul li{
+			display: block;
+			width: 100%;
+			height: 90px;
+			background:rgba(221,221,221,0);
+			margin: 80px auto;
+			font-size: 20px;
+			line-height: 60px;
+		}
+        #left #music ul li audio{
+        	width: 350px;
+        	height: 50px;
+        	margin-left:100px;
+        	margin-top: 16px;
+        	opacity: 0.8;
+        	filter: alpha(opacity:80);
+        }
+        #left #music ul li img{
+        	width: 80px;
+        	height: 80px;
+        	display: inline-block;
+        	position: absolute;
+        	top: 80px;
+        	left:13px;
+        	z-index: 1;
+        	cursor: Default;  	
+        	opacity: 0.8;
+        	filter: alpha(opacity:80);
+        }
+         #left #music ul li .ikonmusic{
+         	position: absolute;
+        	top: 255px;
+        	left:13px;
+         }
+         /*发表文章*/
+		#left #write{
+			width: 100%;
+			height: 92%;
+			position:relative;			
+		}
+		#left #write #content{
+			margin: 100px 50px;
+			max-height: 200px;
+			max-width: 360px;
+			width: 360px;
+			height: 200px;
+			resize: none;
+			padding: 10px;
+			font-size: 16px;
+			border: none;
+			border-radius: 10px;
+			background:rgba(232,232,232,0.9);
+			line-height: 30px;
+			word-wrap: break-word;
+		}
+		#left #write #submit{
+			width: 70px;
+			height: 30px;
+			position:absolute;
+			top: 360px;
+			right: 100px;
+		}
+		#left #write #mysuccess{
+			width: 60px;
+			height: 25px;
+			display: inline-block;
+			background:#DDDDDD;
+			text-align: center;
+			line-height: 25px;
+			font-size: 13px;
+			position: absolute;
+			top: 360px;
+			right: 20px;
+			border-radius: 8px;
+			display: none;
+		}
+		#left #write #total_num{
+			width: 130px;
+			height: 25px;
+			display: inline-block;
+			position: absolute;
+			top: 316px;
+			right: 63px;
+			color: rgba(232,232,232,0.6);
+			font-size: 16px;
+			font-family:"YouYuan";			
+		}
+		#left #write #total_num em{
+			color: rgba(232,232,232,0.9);
+			font-weight: bolder;
+		}
+		#left ul{
+			width: 100%;
+			height: 8%;
+			background:rgba(221,221,221,0.2);			
+		}
+		#left ul li{
+			display: inline-block;
+			margin: 3px 70px;
+			width: 70px;
+			height: 45px;
+			font-size: 30px;
+			text-align: center;
+			line-height: 50px;
+			border-radius: 10px;
+			background:rgba(255,100,97,.6);
+			cursor: pointer;
+		}
+		#left ul li:hover{
+			background:rgba(255,100,97,1);
+		}
+
+		/*右边部分*/
+		#right{
+			width:65%;
+			height: 100%;
+			background: url('img/luye.jpg')no-repeat;
+			background-size: cover;
+			float: left;
+			overflow-y: scroll;
+		}
+		#right ul{
+			width: 300px;
+			height: 500px;
+			margin: 50px 150px;
+		}
+		#right ul li{
+			width: 300px;
+			height: 100px;
+			background:rgba(0,15,0,0.9);
+			margin-top: 126px;
+			padding: 16px;
+			font-size: 16px;
+			font-family:"YouYuan";
+			border-radius: 10px;
+			opacity: 0.9;
+			filter: alpha(opacity:90);
+			color: rgba(232,232,232,0.9);
+			position: relative;
+			word-wrap: break-word;
+		}
+		#right ul li span{
+			display: inline-block;
+			position: absolute;
+			top: -21px;
+			left: 20px;
+		}
+		#right ul li p{
+			width: 300px;
+			height: 30px;
+			position: absolute;
+			top:109px;
+			left: 20px;			
+		}
+		#right ul li p .glyphicon-edit{
+			position: absolute;
+			top:0px;
+			left: 10px;
+			font-size: 28px;
+			cursor: pointer;
+		}
+		#right ul li p .glyphicon-heart{
+			position: absolute;
+			top:0px;
+			left: 100px;
+			font-size: 25px;
+			cursor: pointer;
+		}
+		#right ul li p .liuyan_num{
+			position: absolute;
+			top:4px;
+			left: 55px;			
+		}
+		#right ul li p .dianzan_num{
+			position: absolute;
+			top:4px;
+			left: 140px;			
+		}
+		#right ul li .msg{
+			width: 550px;
+			height: 40px;
+			position: absolute;
+			top:142px;
+			left: 20px;
+			background:rgba(0,15,0,0.9);
+			border-radius: 5px;
+			text-indent: 10px;
+			font-size: 12px;
+			display: none;
+		}
+		#right ul li .fabu{
+			width: 50px;
+			height: 40px;
+			position: absolute;
+			top:140px;
+			right: -28px;
+			line-height: 40px;
+			display: none;
+			cursor: pointer;
+		}
+		#right ul li .cancle{
+			width: 50px;
+			height: 40px;
+			position: absolute;
+			top:140px;
+			right: -76px;
+			line-height: 40px;
+			display: none;
+			cursor: pointer;
+		}
+		#right ul li .box{
+			width: 550px;
+			position: absolute;
+			top:152px;
+			left: 20px;
+			border-radius: 5px;
+			text-indent: 10px;
+			font-size: 12px;
+		}
+		#right ul li .box .send{
+			width:550px;
+			height: 40px;
+			background:rgba(0,15,0,0.9);
+			font-size: 14px;
+			line-height: 40px;
+			position: absolute;
+			left:0;
+			display: none;
+			border-radius: 5px;
+		}
+	</style>
+
+	<script src="move.js"></script>
+	<script type="text/javascript">
+		window.onload=function(){
+			// 显示不同侧边页
+			var pencil=document.querySelector('.glyphicon-pencil');
+			var music=document.querySelector('.glyphicon-music');
+			var pencil_page=document.querySelector('#write');
+			var music_page=document.querySelector('#music');
+			pencil.onclick=function(){					
+				pencil_page.style.display='block';
+				music_page.style.display='none';
+			};
+			music.onclick=function(){
+				music_page.style.display='block';
+				pencil_page.style.display='none';
+			};
+
+			// 显示已发布的文章			
+			var show=document.querySelector('#show');
+			if (sessionStorage.a) {
+				show.innerHTML=sessionStorage.a;
+				for(var i=0;i<show.childNodes.length;i++){
+					if (show.childNodes[i].nodeType==1) {
+						run(show.childNodes[i],'width','600');
+						show.childNodes[i].style.opacity=1;
+						show.childNodes[i].style.filter="alpha(opacity=1)";
+					}
+				}	
+
+				//点赞
+				var addzan=document.getElementsByClassName('glyphicon-heart');
+				var dianzan_num=document.getElementsByClassName('dianzan_num');
+				var liuyan=document.getElementsByClassName('glyphicon-edit');
+				var liuyan_num=document.getElementsByClassName('liuyan_num');
+				var msg=document.getElementsByClassName('msg');
+				var fabu=document.getElementsByClassName('fabu');
+				var cancle=document.getElementsByClassName('cancle');
+				var box=document.getElementsByClassName('box');
+				var wenzhang=document.getElementsByClassName('wenzhang');
+				if (addzan) {			
+					for(var i=0;i<addzan.length;i++){
+						addzan[i].index=i;
+			    		addzan[i].onclick=function(){
+			    			var j=this.index;
+			    			var num=parseInt(dianzan_num[j].innerText);
+			    			num+=1;
+			    			dianzan_num[j].innerText=num;
+			    			sessionStorage.a=show.innerHTML;
+			    		}
+					}
+					//留言版
+					for(var i=0;i<liuyan.length;i++){
+						liuyan[i].index=i;
+			    		liuyan[i].onclick=function(){
+			    			var j=this.index;
+			    			var num=parseInt(liuyan_num[j].innerText);		    			
+			    			msg[j].style.display='block';
+				    		fabu[j].style.display='block';
+				    		cancle[j].style.display='block';
+				    		box[j].style.top='194px';
+				    		var send=document.createElement('p');				    		
+		    				send.className='send';	
+				    		fabu[j].onclick=function(){
+				    			num+=1;
+				    			box[j].style.top='152px';
+					    		box[j].appendChild(send);
+					    		send.innerText=msg[j].value;
+					    		msg[j].value='';
+					    		wenzhang[j].style.marginBottom=(115+num*50)+'px';
+					    		send.style.marginTop=-(10-10*num)+'px';
+					    		send.style.top=(-40+num*40)+"px";
+					    		send.style.display='block';
+					    		msg[j].style.display='none';
+					    		fabu[j].style.display='none';
+					    		cancle[j].style.display='none';   
+					    		liuyan_num[j].innerText=num; 
+					    		sessionStorage.a=show.innerHTML;	
+				    		};
+				    		cancle[j].onclick=function(){
+					    		msg[j].value='';
+					    		box[j].style.top='152px';
+					    		msg[j].style.display='none';
+					    		fabu[j].style.display='none';
+						    	cancle[j].style.display='none'; 
+						    	sessionStorage.a=show.innerHTML;  
+				    		};
+			    			sessionStorage.a=show.innerHTML;
+			    		}
+					}
+				}
+			}	
+
+			// 计算文章内容字数
+			document.querySelector('#content').onkeyup=function(){
+				var get_value=document.querySelector('#content').value;
+				var remain=document.querySelector('#remain').innerText;
+				remain=parseInt(remain);
+				remain=100-get_value.length;				
+				if (remain<0) {
+					document.querySelector('#content').value=get_value.substr(0,100);
+				}else{
+					document.querySelector('#remain').innerText=remain;
+				}				
+			};
+
+			// 提交文章内容
+			var submit=document.querySelector('#submit');
+			submit.onclick=function(){	
+				sessionStorage.a=document.querySelector('#content').value;   // sessionStorage保存
+				var li=document.createElement('li'); 
+				var mysuccess=document.getElementById('mysuccess');
+				var value=trim(document.querySelector('#content').value);				
+				if (!value) {
+					mysuccess.innerHTML='没有内容';
+            		mysuccess.style.display='block';
+				}else{	
+					show.insertBefore(li,show.childNodes[0]);
+					li.innerText=sessionStorage.getItem("a");
+					run(li,'width','600',function(){
+					run(li,'opacity',100)
+					});
+					// 添加文章
+					var plist=document.createElement('p');
+					var liuyan=document.createElement('span');
+					var liuyan_num=document.createElement('span');
+					var dianzan_num=document.createElement('span');
+					var dianzan=document.createElement('span');
+					li.appendChild(plist);
+					li.className='wenzhang';				
+					liuyan.className='glyphicon glyphicon-edit';				
+					dianzan.className='glyphicon glyphicon-heart';	
+					liuyan_num.className='liuyan_num';	
+					dianzan_num.className='dianzan_num';											
+					plist.appendChild(liuyan);
+					plist.appendChild(dianzan_num);
+					dianzan_num.innerText='0';
+					plist.appendChild(dianzan);
+					plist.appendChild(liuyan_num);
+					liuyan_num.innerText='0';
+					//留言板	
+					//1.添加留言
+					var msg=document.createElement('input');
+	 				var fabu=document.createElement('em');
+					var cancle=document.createElement('em');
+					li.appendChild(msg);
+					li.appendChild(fabu);
+					li.appendChild(cancle);
+					msg.className='msg';
+					fabu.className='fabu';
+					cancle.className='cancle';
+					msg.placeholder='写点什么...';
+					fabu.innerHTML='发布';
+					cancle.innerHTML='取消';
+					//2.发表留言
+					var liuyan=document.querySelector('.glyphicon-edit');
+					var fabu=document.querySelector('.fabu');
+					var cancle=document.querySelector('.cancle');
+					var box=document.createElement('div');
+					box.className='box';
+					li.appendChild(box);
+			    	var num=0;
+			    	liuyan.onclick=function(){
+			    		var send=document.createElement('p');				    		
+			    		send.className='send';				    		
+				    	fabu.onclick=function () {			    	
+				    		box.style.top='152px';
+				    		box.appendChild(send);
+				    		send.innerText=msg.value;
+				    		msg.value='';
+				    		li.style.marginBottom=(115+num*50)+'px';
+				    		send.style.marginTop=-(10-10*num)+'px';
+				    		send.style.top=(-40+num*40)+"px";
+				    		send.style.display='block';
+				    		msg.style.display='none';
+				    		fabu.style.display='none';
+				    		cancle.style.display='none';   
+				    		liuyan_num.innerText=num; 	
+				    	};
+				    	cancle.onclick=function(){
+				    		num-=1;
+				    		liuyan_num.innerText=num;
+				    		msg.value='';
+				    		box.style.top='152px';
+				    		msg.style.display='none';
+				    		fabu.style.display='none';
+					    	cancle.style.display='none';   
+			    		};
+				    };			    	
+			    	window.location.reload();			    
+				}
+	    		// 存储sessionStorage
+				sessionStorage.a=show.innerHTML;				
+			}
+		}		 
+	</script>
+</head>
+<body>
+	<!-- 左边部分 -->
+	<div id="left">
+		<div id="write">
+			<form id="putForm">
+				<textarea name="content" id="content" autocomplete="off"></textarea><br/>
+				<input type="button" name="submit" id="submit" value="发布" >
+				<span id="total_num">最多输入<em id="remain">100</em>个字</span>
+				<span id="mysuccess">发布成功</span>
+			</form>
+		</div>
+		<div id="music">
+			<ul id="music_lists">
+				<li class="music_list">
+					<img src="img/engi.jpg">
+					<audio src="energetic.mp3" controls="controls">您的浏览器不支持 audio 标签。</audio>
+				</li>
+				<li class="music_list">
+					<img src="img/ikonmusic.png" class="ikonmusic">
+					<audio src="ikon.m4a" controls="controls">您的浏览器不支持 audio 标签。</audio>
+				</li>
+			</ul>
+		</div>
+		<ul id="list">
+			<li><span class="glyphicon glyphicon-pencil"></span></li>
+			<li><span class="glyphicon glyphicon-music"></span></li>
+		</ul>
+	</div>
+
+	<!-- 右边部分 -->
+	<div id="right">
+		<ul id="show">			
+		</ul>
+	</div>
+</body>
+</html>

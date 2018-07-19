@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		html,body{
+			width: 100%;
+			height: 100%;
+			background-color: #000000;
+		}
+		canvas{
+			position: absolute;
+			top: 50px;
+			left: 230px;
+			animation:name 10s infinite;
+			-webkit-animation:name 10s infinite; /*Safari and Chrome*/
+		}
+		@keyframes rotating{
+			0% {transform:rotateX(0) rotateY(0) rotateZ(0)}
+			100% {transform:rotateX(360deg) rotateY(360deg) rotateZ(360deg)}		
+		}
+		button{
+			position: absolute;
+			top: 555px;
+			left: 490px;
+			width: 80px;
+			height: 35px;
+			background-color:rgba(255,0,136,.7);
+			border: none;
+			border-radius: 5px;
+			font-weight: bolder;
+		}
+		#btn2{
+			position: absolute;
+			top: 555px;
+			left: 700px;
+		}
+		button:hover{
+			background-color:rgba(255,0,136,1);
+			cursor: pointer;
+		}
+		#box span{
+			display: inline-block;
+			width: 56px;
+			height: 30px;
+			background-color:rgba(221,221,221,0.6);
+			position: absolute;
+			top:70px;
+			left: 66px;
+			text-align: center;
+			line-height: 30px;
+			font-weight: bolder;
+			border-radius: 5px;
+		}
+		#box #shadow{
+			position: absolute;
+			top:370px;
+			left: 66px;
+			cursor: pointer;
+		}
+		#box #black{
+			position: absolute;
+			top:420px;
+			left: 66px;
+			cursor: pointer;
+		}
+		#box #clear{
+			position: absolute;
+			top:470px;
+			left: 66px;
+			cursor: pointer;
+		}
+		#box ul{
+			width: 50px;
+			position: absolute;
+			top:100px;
+			left: 70px;
+		}
+		#box ul li{
+			cursor: pointer;
+			width: 30px;
+			height: 30px;
+			margin: 10px auto;
+			list-style: none;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function () {
+			// 画布
+			var Oc=document.getElementById("myCanvas");
+			var ctx=Oc.getContext("2d");
+			ctx.lineWidth = 6;			
+			Oc.onmousedown=function(ev){
+				var e=ev||window.event;
+				ctx.beginPath(); 
+				ctx.strokeStyle = 'red'; 
+				ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+				document.onmousemove=function(ev){
+					var e=ev||window.event;
+					ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+					ctx.stroke();
+				};
+				document.onmouseup=function(){
+					document.onmousemove=null;
+					document.onmouseup=null;
+				}
+			};
+
+			// 选色
+			var blue=document.getElementById('blue');
+			blue.onclick=function(){
+				getColor("blue")
+			};
+			var green=document.getElementById('green');
+			green.onclick=function(){
+					getColor("green")
+			};
+			var red=document.getElementById('red');
+			red.onclick=function(){
+					getColor("red")
+			};
+			var purple=document.getElementById('purple');
+			purple.onclick=function(){
+					getColor("purple")
+			};
+			var yellow=document.getElementById('yellow');
+			yellow.onclick=function(){
+					getColor("yellow")
+			};
+			var white=document.getElementById('white');
+			white.onclick=function(){
+					getColor("white")
+			};
+
+			// 橡皮擦
+			var black=document.getElementById('black');
+			black.onclick=function(){
+					getColor("black")
+			};
+			function getColor(color){
+				Oc.onmousedown=function(ev){
+					var e=ev||window.event;
+					ctx.strokeStyle = color;
+					ctx.beginPath(); 
+					ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+					document.onmousemove=function(ev){
+						var e=ev||window.event;
+						ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+
+						ctx.stroke();
+					};
+					document.onmouseup=function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+					}
+				}
+			}
+
+			// 设置及取消阴影
+			var shadow=document.getElementById('shadow');
+			var num=0;
+			shadow.onclick=function(){
+				num+=1;
+				if (num%2==1) {
+					getShadow();
+					shadow.innerText='去阴影';
+				}else{
+					removeShadow();
+					shadow.innerText='阴影';
+				}								
+			};
+			//设置阴影
+			function getShadow(){
+				Oc.onmousedown=function(ev){
+					var e=ev||window.event;
+					ctx.shadowColor = 'rgba(255, 255, 255, 0.2)';
+					ctx.shadowOffsetX = 2;
+	    			ctx.shadowOffsetY = 2;
+	    			ctx.shadowBlur = 2;
+					ctx.beginPath(); 
+					ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+					document.onmousemove=function(ev){
+						var e=ev||window.event;
+						ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+
+						ctx.stroke();
+					};
+					document.onmouseup=function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+					}
+				}
+			}
+			//取消阴影
+			function removeShadow(){
+				Oc.onmousedown=function(ev){
+					var e=ev||window.event;
+					ctx.shadowColor = 'rgba(0, 0, 0, 0)';
+					ctx.shadowOffsetX = 0;
+	    			ctx.shadowOffsetY = 0;
+	    			ctx.shadowBlur = 0;
+					ctx.beginPath(); 
+					ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+					document.onmousemove=function(ev){
+						var e=ev||window.event;
+						ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+
+						ctx.stroke();
+					};
+					document.onmouseup=function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+					}
+				}
+			}
+
+			//清空画布
+			var clear=document.getElementById('clear');
+			clear.onclick=function(){	
+				ctx.clearRect(0,0,Oc.width,Oc.height);
+			}
+
+			// 运动按钮
+			var starPlay=document.getElementById('btn1');
+			var endPlay=document.getElementById('btn2');
+			var box=document.getElementById('box');
+			starPlay.onclick=function () {
+				box.style.display='none';
+				Oc.style.border='none';
+				Oc.style.animationName="rotating";
+			};
+			endPlay.onclick=function () {
+				box.style.display='block';
+				Oc.style.border='1px solid #d3d3d3';
+				Oc.style.animationName="name";
+			};  	
+		}		
+	</script>
+</head>
+<body>
+	<div id="box">
+		<span id="color">选色</span>
+		<ul>	
+			<li id="red" style="background-color: red"></li>
+			<li id="green" style="background-color: green"></li>
+			<li id="purple" style="background-color: purple"></li>
+			<li id="blue" style="background-color: blue"></li>
+			<li id="yellow" style="background-color:yellow"></li>
+			<li id="white" style="background-color: white"></li>			
+		</ul>
+		<span id="shadow">阴影</span>
+		<span id="black">橡皮擦</span>
+		<span id="clear">清空</span>
+	</div>
+	<canvas id="myCanvas" width="900" height="400" style="border:1px solid #d3d3d3;">您你浏览器需要升级啦^-^</canvas>
+	<button id="btn1">开始旋转</button>
+	<button id="btn2">停止旋转</button>
+</body>
+</html>

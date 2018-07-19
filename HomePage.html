@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="clearCSS.css">
+	<style type="text/css">
+		html,body{
+			width: 100%;
+			height: 100%;
+		}
+
+		/*nav*/
+		header img{
+			width: 100%;
+			height: 400px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1;
+		}
+		header .welcome{
+			position:absolute;
+			top: 60px;
+			left: 40px;
+			z-index: 2;
+			color: #C0C0C0;
+			font-style: italic;
+			font-size: 20px;
+		}
+		header nav{
+			width: 100%;
+			height: 50px;
+			position:fixed;
+			top:0;
+			left: 0;
+			z-index: 3;
+			background:rgba(0,0,0,0.5);
+		}
+		header nav #search{
+			height: 35px;
+			width: 280px;
+			position: absolute;
+			top: 8px;
+			left: 28px;
+			text-indent: 20px;
+			border-top-left-radius: 17px;
+			border-bottom-left-radius: 17px;
+			outline: none;
+			border: 0px;
+			background: rgba(118,118,118,0.2);
+			color: rgba(255,255,255,0.7);
+
+		}
+		header nav #btn_search{
+			display: inline-block;
+			position: absolute;
+			top: 8px;
+			left: 308px;
+			font-size: 15px;
+			text-decoration: none;
+			width: 75px;
+			height: 35px;
+			background: rgba(192,192,192,0.5);
+			text-align: center;
+			line-height: 33px;
+			border-top-right-radius: 17px;
+			border-bottom-right-radius: 17px;
+			color: 	#444444;
+		}
+		header nav #btn_search:hover{
+			background: rgba(192,192,192,0.9);
+		}
+		header nav #search:hover{
+			background: rgba(118,118,118,0.3);
+		}
+		header #move_btn{
+			width: 60px;
+			height: 60px;
+			background: rgba(192,192,192,0.5);
+			position: absolute;
+			top:200px;
+			left: 0;
+			z-index: 5;
+			cursor: pointer;
+			border-radius: 20px;
+			font-size: 14px;
+			text-align: center;
+			line-height: 60px;
+			font-weight: bolder;
+		}
+		header #move_btn #mark{
+			display: inline-block;
+			width: 150px;
+			height: 25px;
+			position: absolute;
+			top: 19px;
+			left: 95px;
+			background: rgba(192,192,192,0.8);
+			text-align: center;
+			line-height: 25px;
+			border-radius: 10px;
+			display: none;
+		}
+		header #move_btn #mark em{
+			display: inline-block;
+			position: absolute;
+			top: 0;
+			left: -25px;
+			color: rgba(192,192,192,0.8);
+
+		}
+		header #move_btn:hover{
+			background: rgba(192,192,192,0.9);
+		}
+		header #link{
+			width: 450px;
+			height: 450px;
+			position: absolute;
+			top:105px;
+			left: 405px;
+			z-index:5;
+			background: rgba(192,192,192,0.5);
+			border-radius: 100px;
+			display: none;
+		}
+		header #link #close{
+			font-size: 20px;
+			position: absolute;
+			top: 8px;
+			right: 0px;
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			border-radius: 15px;
+			background: rgba(192,192,192,0.7);
+			text-align: center;
+			line-height: 30px;
+			cursor: pointer;
+		}
+		header #link #close:hover{
+			background: rgb(192,192,192);
+		}
+		header #link #icon{
+			width: 330px;
+			height: 330px;
+			background: rgba(0,0,0,0);
+			position: absolute;
+			top:66px;
+			left: 59px;
+		}		
+		header #link #icon img{
+			display: inline-block;
+			width: 75px;
+			height: 75px;
+			border-radius: 10px;
+		}
+		header #link #icon #baidu{
+			position: absolute;
+			left: 0px;
+			top:0px;
+		}
+		header #link #icon #youdao{
+			position: absolute;
+			left: 128px;
+			top:0px;
+		}
+		header #link #icon #taobao{
+			position: absolute;
+			left: 254px;
+			top:0px;
+		}
+		header #link #icon #aqy{
+			position: absolute;
+			left: 0px;
+			top:118px;
+		}
+		header #link #icon #weixin{
+			position: absolute;
+			left: 128px;
+			top:118px;
+		}
+		header #link #icon #zfb{
+			position: absolute;
+			left: 254px;
+			top:118px;
+		}
+		header #link #icon #meituan{
+			position: absolute;
+			left: 0px;
+			top:235px;
+		}
+		/*正文*/
+		#container{
+			background-color:rgb(38,38,38); 
+			width: 100%;
+			position: absolute;
+			top: 400px;
+			left: 0;
+		}
+		#container #main{
+			width: 1220px;
+			margin: 0px auto;
+			
+		}
+		#container #main .chapter {
+			display: inline-block;
+			margin: 30px 4px;
+			width: 394px;
+			height: 255px;
+			overflow: hidden;
+			position: relative;
+		}
+		#container #main .chapter h1{
+			font-size: 28px;
+		}
+		#container #main .chapter img{
+			width: 394px;
+			height: 255px;
+			transition:transform 1s;
+			-moz-transition:transform 1s; /* Firefox 4 */
+			-webkit-transition:transform 1s; /* Safari and Chrome */
+			-o-transition:transform 1s; /* Opera */
+		}
+		#container #main .chapter img:hover{
+			transform:scale(1.5);	
+			width: 394px;
+			height: 255px;
+			overflow: hidden;;
+		}
+		#container #main .chapter_inner{
+			position: absolute;
+			top: 177px;
+			left: 45px;
+			font-family:"YouYuan";
+			color: #C0C0C0;
+		}
+		#container #main .chapter_inner h1{
+			font-weight: bolder;
+			display: inline-block;
+		}
+		/*footer*/
+		footer{
+			padding-top: 20px;
+			width: 100%;
+			height: 100px;
+			background-color: rgb(38,38,38);
+			position: absolute;
+			top: 700px;
+			left: 0px;
+			font-size: 18px;
+			text-align: center;
+			line-height: 30px;
+			color: rgba(192,192,192,0.5);
+			font-family:"YouYuan";
+		}
+	</style>
+	<script src="move.js"></script>
+	<script type="text/javascript">
+		window.onload=function () {
+			// 百度搜索
+			var btn_search=document.getElementById('btn_search');
+			var search=document.getElementById('search');			
+			btn_search.onclick=function () {
+				btn_search.href="https://www.baidu.com/s?wd="+search.value;
+			};			
+			function getKey(event)
+			{
+				var keyCode=event.keyCode||event.which||event.charCode;
+			    if(keyCode==13){
+			     window.open('https://www.baidu.com/s?wd='+search.value)
+			    }   
+			}
+			search.onkeyup = getKey;
+
+			// 拖拽
+			var move_btn=document.getElementById('move_btn');
+			var link=document.getElementById('link');
+			var mark=document.getElementById('mark');
+			move_btn.onclick=function(){
+				drag(move_btn);
+			}
+			
+			// 显示友情连接			
+			var close=document.getElementById('close');
+			move_btn.ondblclick=function () {
+				link.style.display='block'
+			};
+			close.onclick=function () {				
+				link.style.display='none'
+			};
+
+			// 显示mark			
+			move_btn.onmouseover=function () {
+				mark.style.display='block'
+			};
+			move_btn.onmouseout=function () {
+				mark.style.display='none'
+			};
+			move_btn.onmousedown=function () {
+				this.onmousemove=function () {
+					mark.style.display='none'
+				}			
+			}
+		}
+	</script>
+</head>
+<body>	
+	<header>
+		<nav>
+			<input type="search" name="search" id="search" placeholder="  百度搜索">
+			<a href="http://www.baidu.com" target='_blank' id='btn_search'>搜索</a>
+		</nav>
+		<img src="img/yun.gif">
+		<p class="welcome">
+			Welcome To My HomePage
+		</p>
+		<p id="move_btn">
+			友情链接
+			<span id="mark"><em>&lt;--</em>单击拖动，双击打开</span>
+		</p>
+		
+		<div id="link">
+			<span class="glyphicon glyphicon-remove" id="close"></span>
+			<div id="icon">
+			<a href="http://www.baidu.com" id="baidu" target="_blank"><img src="img/baidu.png"></a>
+			<a href="http://www.youdao.com" id="youdao" target="_blank"><img src="img/youdao.png"></a>
+			<a href="https://www.taobao.com" id="taobao" target="_blank"><img src="img/taobao.png"></a>
+			<a href="http://www.iqiyi.com/" id="aqy" target="_blank"><img src="img/aqy.png"></a>
+			<a href="https://wx.qq.com/" id="weixin" target="_blank"><img src="img/weixin.png"></a>
+			<a href="https://auth.alipay.com/login/index.htm" id="zfb" target="_blank"><img src="img/zfb.png"></a>
+			<a href="https://www.meituan.com/" id="meituan" target="_blank"><img src="img/meituan.png"></a>
+			</div>
+		</div>
+	</header>
+
+	<div id="container">
+		<div id="main">
+			<div class="chapter">
+				<a href="file:///C:/Users/xzl/Desktop/sublime/HomePage/msg.html" target="_blank">
+					<img src="img/malaysia.jpg">
+				</a>
+				<div class="chapter_inner">
+					<h1>写点什么</h1> 
+				</div>
+			</div>
+			<div class="chapter">
+				<a href="file:///C:/Users/xzl/Desktop/sublime/HomePage/output.html" target="_blank">
+					<img src="img/nevada.jpg">
+				</a>
+				<div class="chapter_inner">
+					<h1>小小蜘蛛网</h1> 
+				</div>
+
+			</div>
+			<div class="chapter">
+				<a href="file:///C:/Users/xzl/Desktop/sublime/HomePage/dog.html" target="_blank">
+					<img src="img/canyon.jpg">
+				</a>
+				<div class="chapter_inner">
+					<h1>旋转的涂鸦</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		感谢您的浏览&nbsp;&nbsp;&nbsp;So Call Me,Maybe<br>&nbsp; &nbsp;&nbsp;电话：18780162375&nbsp;&nbsp;&nbsp;邮箱：2286465251@qq.com
+	</footer>
+</body>
+</html>
