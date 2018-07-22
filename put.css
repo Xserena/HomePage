@@ -43,3 +43,47 @@ ul li:hover{
 	overflow: scroll;
 	background: rgb(32,32,32);
 }
+/*响应式*/
+@media only screen and (max-width: 1150px) {
+	ul{
+		margin-left:200px;
+
+	}
+	h2{
+		margin-left:330px;
+	}
+	.box{
+		top:650px;
+		right:200px;
+		width: 600px;
+	}
+}
+@media only screen and (max-width: 900px) {
+	ul{
+		margin-left:100px;
+
+	}
+	h2{
+		margin-left:230px;
+	}
+	.box{
+		top:650px;
+		right:100px;
+		width: 550px;
+	}
+}
+@media only screen and (max-width: 600px) {
+	ul{
+		margin-left:-50px;
+
+	}
+	h2{
+		margin-left:100px;
+	}
+	.box{
+		top:650px;
+		right:50px;
+		width: 300px;
+		font-size:12px;
+	}
+}
