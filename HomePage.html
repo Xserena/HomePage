@@ -258,50 +258,65 @@
 	<script src="move.js"></script>
 	<script type="text/javascript">
 		window.onload=function () {
-			// 百度搜索
-			var btn_search=document.getElementById('btn_search');
-			var search=document.getElementById('search');			
-			btn_search.onclick=function () {
-				btn_search.href="https://www.baidu.com/s?wd="+search.value;
-			};			
-			function getKey(event)
-			{
-				var keyCode=event.keyCode||event.which||event.charCode;
-			    if(keyCode==13){
-			     window.open('https://www.baidu.com/s?wd='+search.value)
-			    }   
-			}
-			search.onkeyup = getKey;
+			function IEVersion() {
+			    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+			    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
+			    if(isIE) {
+				var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+				reIE.test(userAgent);
+				var fIEVersion = parseFloat(RegExp["$1"]);
+				if(fIEVersion <9) {
+				    document.write('您的浏览器版本过低，请升级吧^-^');
+				}
+			    } 
+			    else{
+				// 百度搜索
+				var btn_search=document.getElementById('btn_search');
+				var search=document.getElementById('search');			
+				btn_search.onclick=function () {
+					btn_search.href="https://www.baidu.com/s?wd="+search.value;
+				};			
+				function getKey(event)
+				{
+					var keyCode=event.keyCode||event.which||event.charCode;
+				    if(keyCode==13){
+				     window.open('https://www.baidu.com/s?wd='+search.value)
+				    }   
+				}
+				search.onkeyup = getKey;
 
-			// 拖拽
-			var move_btn=document.getElementById('move_btn');
-			var link=document.getElementById('link');
-			var mark=document.getElementById('mark');
-			move_btn.onclick=function(){
-				drag(move_btn);
-			}
-			
-			// 显示友情连接			
-			var close=document.getElementById('close');
-			move_btn.ondblclick=function () {
-				link.style.display='block'
-			};
-			close.onclick=function () {				
-				link.style.display='none'
-			};
+				// 拖拽
+				var move_btn=document.getElementById('move_btn');
+				var link=document.getElementById('link');
+				var mark=document.getElementById('mark');
+				move_btn.onclick=function(){
+					drag(move_btn);
+				};
 
-			// 显示mark			
-			move_btn.onmouseover=function () {
-				mark.style.display='block'
-			};
-			move_btn.onmouseout=function () {
-				mark.style.display='none'
-			};
-			move_btn.onmousedown=function () {
-				this.onmousemove=function () {
+				// 显示友情连接			
+				var close=document.getElementById('close');
+				move_btn.ondblclick=function () {
+					link.style.display='block'
+				};
+				close.onclick=function () {				
+					link.style.display='none'
+				};
+
+				// 显示mark			
+				move_btn.onmouseover=function () {
+					mark.style.display='block'
+				};
+				move_btn.onmouseout=function () {
 					mark.style.display='none'
-				}			
+				};
+				move_btn.onmousedown=function () {
+					this.onmousemove=function () {
+						mark.style.display='none'
+					}			
+				}
+			    }
 			}
+			IEVersion() 	
 		}
 	</script>
 </head>
