@@ -91,154 +91,169 @@
 	</style>
 	<script type="text/javascript">
 		window.onload=function () {
-			// 画布
-			var Oc=document.getElementById("myCanvas");
-			var ctx=Oc.getContext("2d");
-			ctx.lineWidth = 6;			
-			Oc.onmousedown=function(ev){
-				var e=ev||window.event;
-				ctx.beginPath(); 
-				ctx.strokeStyle = 'red'; 
-				ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
-				document.onmousemove=function(ev){
+			function IEVersion() {
+			    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+			    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
+			    if(isIE) {
+				var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+				reIE.test(userAgent);
+				var fIEVersion = parseFloat(RegExp["$1"]);
+				if(fIEVersion <9) {
+				    document.write('您的浏览器版本过低，请升级吧^-^');
+				}
+			    } 
+			    else{
+				// 画布
+				var Oc=document.getElementById("myCanvas");
+				var ctx=Oc.getContext("2d");
+				ctx.lineWidth = 6;			
+				Oc.onmousedown=function(ev){
 					var e=ev||window.event;
-					ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
-					ctx.stroke();
+					ctx.beginPath(); 
+					ctx.strokeStyle = 'red'; 
+					ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+					document.onmousemove=function(ev){
+						var e=ev||window.event;
+						ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+						ctx.stroke();
+					};
+					document.onmouseup=function(){
+						document.onmousemove=null;
+						document.onmouseup=null;
+					}
 				};
-				document.onmouseup=function(){
-					document.onmousemove=null;
-					document.onmouseup=null;
-				}
-			};
 
-			// 选色
-			var blue=document.getElementById('blue');
-			blue.onclick=function(){
-				getColor("blue")
-			};
-			var green=document.getElementById('green');
-			green.onclick=function(){
-					getColor("green")
-			};
-			var red=document.getElementById('red');
-			red.onclick=function(){
-					getColor("red")
-			};
-			var purple=document.getElementById('purple');
-			purple.onclick=function(){
-					getColor("purple")
-			};
-			var yellow=document.getElementById('yellow');
-			yellow.onclick=function(){
-					getColor("yellow")
-			};
-			var white=document.getElementById('white');
-			white.onclick=function(){
-					getColor("white")
-			};
+				// 选色
+				var blue=document.getElementById('blue');
+				blue.onclick=function(){
+					getColor("blue")
+				};
+				var green=document.getElementById('green');
+				green.onclick=function(){
+						getColor("green")
+				};
+				var red=document.getElementById('red');
+				red.onclick=function(){
+						getColor("red")
+				};
+				var purple=document.getElementById('purple');
+				purple.onclick=function(){
+						getColor("purple")
+				};
+				var yellow=document.getElementById('yellow');
+				yellow.onclick=function(){
+						getColor("yellow")
+				};
+				var white=document.getElementById('white');
+				white.onclick=function(){
+						getColor("white")
+				};
 
-			// 橡皮擦
-			var black=document.getElementById('black');
-			black.onclick=function(){
-					getColor("black")
-			};
-			function getColor(color){
-				Oc.onmousedown=function(ev){
-					var e=ev||window.event;
-					ctx.strokeStyle = color;
-					ctx.beginPath(); 
-					ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
-					document.onmousemove=function(ev){
+				// 橡皮擦
+				var black=document.getElementById('black');
+				black.onclick=function(){
+						getColor("black")
+				};
+				function getColor(color){
+					Oc.onmousedown=function(ev){
 						var e=ev||window.event;
-						ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+						ctx.strokeStyle = color;
+						ctx.beginPath(); 
+						ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+						document.onmousemove=function(ev){
+							var e=ev||window.event;
+							ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
 
-						ctx.stroke();
-					};
-					document.onmouseup=function(){
-						document.onmousemove=null;
-						document.onmouseup=null;
+							ctx.stroke();
+						};
+						document.onmouseup=function(){
+							document.onmousemove=null;
+							document.onmouseup=null;
+						}
 					}
 				}
-			}
 
-			// 设置及取消阴影
-			var shadow=document.getElementById('shadow');
-			var num=0;
-			shadow.onclick=function(){
-				num+=1;
-				if (num%2==1) {
-					getShadow();
-					shadow.innerText='去阴影';
-				}else{
-					removeShadow();
-					shadow.innerText='阴影';
-				}								
-			};
-			//设置阴影
-			function getShadow(){
-				Oc.onmousedown=function(ev){
-					var e=ev||window.event;
-					ctx.shadowColor = 'rgba(255, 255, 255, 0.2)';
-					ctx.shadowOffsetX = 2;
-	    			ctx.shadowOffsetY = 2;
-	    			ctx.shadowBlur = 2;
-					ctx.beginPath(); 
-					ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
-					document.onmousemove=function(ev){
+				// 设置及取消阴影
+				var shadow=document.getElementById('shadow');
+				var num=0;
+				shadow.onclick=function(){
+					num+=1;
+					if (num%2==1) {
+						getShadow();
+						shadow.innerText='去阴影';
+					}else{
+						removeShadow();
+						shadow.innerText='阴影';
+					}								
+				};
+				//设置阴影
+				function getShadow(){
+					Oc.onmousedown=function(ev){
 						var e=ev||window.event;
-						ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+						ctx.shadowColor = 'rgba(255, 255, 255, 0.2)';
+						ctx.shadowOffsetX = 2;
+					ctx.shadowOffsetY = 2;
+					ctx.shadowBlur = 2;
+						ctx.beginPath(); 
+						ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+						document.onmousemove=function(ev){
+							var e=ev||window.event;
+							ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
 
-						ctx.stroke();
-					};
-					document.onmouseup=function(){
-						document.onmousemove=null;
-						document.onmouseup=null;
+							ctx.stroke();
+						};
+						document.onmouseup=function(){
+							document.onmousemove=null;
+							document.onmouseup=null;
+						}
 					}
 				}
-			}
-			//取消阴影
-			function removeShadow(){
-				Oc.onmousedown=function(ev){
-					var e=ev||window.event;
-					ctx.shadowColor = 'rgba(0, 0, 0, 0)';
-					ctx.shadowOffsetX = 0;
-	    			ctx.shadowOffsetY = 0;
-	    			ctx.shadowBlur = 0;
-					ctx.beginPath(); 
-					ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
-					document.onmousemove=function(ev){
+				//取消阴影
+				function removeShadow(){
+					Oc.onmousedown=function(ev){
 						var e=ev||window.event;
-						ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+						ctx.shadowColor = 'rgba(0, 0, 0, 0)';
+						ctx.shadowOffsetX = 0;
+					ctx.shadowOffsetY = 0;
+					ctx.shadowBlur = 0;
+						ctx.beginPath(); 
+						ctx.moveTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
+						document.onmousemove=function(ev){
+							var e=ev||window.event;
+							ctx.lineTo(e.clientX-Oc.offsetLeft,e.clientY-Oc.offsetTop);
 
-						ctx.stroke();
-					};
-					document.onmouseup=function(){
-						document.onmousemove=null;
-						document.onmouseup=null;
+							ctx.stroke();
+						};
+						document.onmouseup=function(){
+							document.onmousemove=null;
+							document.onmouseup=null;
+						}
 					}
 				}
-			}
 
-			//清空画布
-			var clear=document.getElementById('clear');
-			clear.onclick=function(){	
-				ctx.clearRect(0,0,Oc.width,Oc.height);
-			}
+				//清空画布
+				var clear=document.getElementById('clear');
+				clear.onclick=function(){	
+					ctx.clearRect(0,0,Oc.width,Oc.height);
+				};
 
-			// 运动按钮
-			var starPlay=document.getElementById('btn1');
-			var endPlay=document.getElementById('btn2');
-			var box=document.getElementById('box');
-			starPlay.onclick=function () {
-				box.style.display='none';
-				Oc.style.border='none';
-				Oc.style.animationName="rotating";
-			};
-			endPlay.onclick=function () {
-				box.style.display='block';
-				Oc.style.border='1px solid #d3d3d3';
-				Oc.style.animationName="name";
-			};  	
+				// 运动按钮
+				var starPlay=document.getElementById('btn1');
+				var endPlay=document.getElementById('btn2');
+				var box=document.getElementById('box');
+				starPlay.onclick=function () {
+					box.style.display='none';
+					Oc.style.border='none';
+					Oc.style.animationName="rotating";
+				};
+				endPlay.onclick=function () {
+					box.style.display='block';
+					Oc.style.border='1px solid #d3d3d3';
+					Oc.style.animationName="name";
+				};  	
+			    }
+			}
+			IEVersion()			
 		}		
 	</script>
 </head>
