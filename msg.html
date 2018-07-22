@@ -268,196 +268,211 @@
 	<script src="move.js"></script>
 	<script type="text/javascript">
 		window.onload=function(){
-			// 显示不同侧边页
-			var pencil=document.querySelector('.glyphicon-pencil');
-			var music=document.querySelector('.glyphicon-music');
-			var pencil_page=document.querySelector('#write');
-			var music_page=document.querySelector('#music');
-			pencil.onclick=function(){					
-				pencil_page.style.display='block';
-				music_page.style.display='none';
-			};
-			music.onclick=function(){
-				music_page.style.display='block';
-				pencil_page.style.display='none';
-			};
+			function IEVersion() {
+			    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
+			    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
+			    if(isIE) {
+				var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+				reIE.test(userAgent);
+				var fIEVersion = parseFloat(RegExp["$1"]);
+				if(fIEVersion <9) {
+				    document.write('您的浏览器版本过低，请升级吧^-^');
+				}
+			    } 
+			    else{
+				// 显示不同侧边页
+				var pencil=document.querySelector('.glyphicon-pencil');
+				var music=document.querySelector('.glyphicon-music');
+				var pencil_page=document.querySelector('#write');
+				var music_page=document.querySelector('#music');
+				pencil.onclick=function(){					
+					pencil_page.style.display='block';
+					music_page.style.display='none';
+				};
+				music.onclick=function(){
+					music_page.style.display='block';
+					pencil_page.style.display='none';
+				};
 
-			// 显示已发布的文章			
-			var show=document.querySelector('#show');
-			if (sessionStorage.a) {
-				show.innerHTML=sessionStorage.a;
-				for(var i=0;i<show.childNodes.length;i++){
-					if (show.childNodes[i].nodeType==1) {
-						run(show.childNodes[i],'width','600');
-						show.childNodes[i].style.opacity=1;
-						show.childNodes[i].style.filter="alpha(opacity=1)";
+				// 显示已发布的文章			
+				var show=document.querySelector('#show');
+				if (sessionStorage.a) {
+					show.innerHTML=sessionStorage.a;
+					for(var i=0;i<show.childNodes.length;i++){
+						if (show.childNodes[i].nodeType==1) {
+							run(show.childNodes[i],'width','600');
+							show.childNodes[i].style.opacity=1;
+							show.childNodes[i].style.filter="alpha(opacity=1)";
+						}
+					}	
+
+					//点赞
+					var addzan=document.getElementsByClassName('glyphicon-heart');
+					var dianzan_num=document.getElementsByClassName('dianzan_num');
+					var liuyan=document.getElementsByClassName('glyphicon-edit');
+					var liuyan_num=document.getElementsByClassName('liuyan_num');
+					var msg=document.getElementsByClassName('msg');
+					var fabu=document.getElementsByClassName('fabu');
+					var cancle=document.getElementsByClassName('cancle');
+					var box=document.getElementsByClassName('box');
+					var wenzhang=document.getElementsByClassName('wenzhang');
+					if (addzan) {			
+						for(var i=0;i<addzan.length;i++){
+							addzan[i].index=i;
+						addzan[i].onclick=function(){
+							var j=this.index;
+							var num=parseInt(dianzan_num[j].innerText);
+							num+=1;
+							dianzan_num[j].innerText=num;
+							sessionStorage.a=show.innerHTML;
+						}
+						}
+						//留言版
+						for(var i=0;i<liuyan.length;i++){
+							liuyan[i].index=i;
+						liuyan[i].onclick=function(){
+							var j=this.index;
+							var num=parseInt(liuyan_num[j].innerText);		    			
+							msg[j].style.display='block';
+							fabu[j].style.display='block';
+							cancle[j].style.display='block';
+							box[j].style.top='194px';
+							var send=document.createElement('p');				    		
+							send.className='send';	
+							fabu[j].onclick=function(){
+								num+=1;
+								box[j].style.top='152px';
+								box[j].appendChild(send);
+								send.innerText=msg[j].value;
+								msg[j].value='';
+								wenzhang[j].style.marginBottom=(115+num*50)+'px';
+								send.style.marginTop=-(10-10*num)+'px';
+								send.style.top=(-40+num*40)+"px";
+								send.style.display='block';
+								msg[j].style.display='none';
+								fabu[j].style.display='none';
+								cancle[j].style.display='none';   
+								liuyan_num[j].innerText=num; 
+								sessionStorage.a=show.innerHTML;	
+							};
+							cancle[j].onclick=function(){
+								msg[j].value='';
+								box[j].style.top='152px';
+								msg[j].style.display='none';
+								fabu[j].style.display='none';
+								cancle[j].style.display='none'; 
+								sessionStorage.a=show.innerHTML;  
+							};
+							sessionStorage.a=show.innerHTML;
+						}
+						}
 					}
 				}	
 
-				//点赞
-				var addzan=document.getElementsByClassName('glyphicon-heart');
-				var dianzan_num=document.getElementsByClassName('dianzan_num');
-				var liuyan=document.getElementsByClassName('glyphicon-edit');
-				var liuyan_num=document.getElementsByClassName('liuyan_num');
-				var msg=document.getElementsByClassName('msg');
-				var fabu=document.getElementsByClassName('fabu');
-				var cancle=document.getElementsByClassName('cancle');
-				var box=document.getElementsByClassName('box');
-				var wenzhang=document.getElementsByClassName('wenzhang');
-				if (addzan) {			
-					for(var i=0;i<addzan.length;i++){
-						addzan[i].index=i;
-			    		addzan[i].onclick=function(){
-			    			var j=this.index;
-			    			var num=parseInt(dianzan_num[j].innerText);
-			    			num+=1;
-			    			dianzan_num[j].innerText=num;
-			    			sessionStorage.a=show.innerHTML;
-			    		}
-					}
-					//留言版
-					for(var i=0;i<liuyan.length;i++){
-						liuyan[i].index=i;
-			    		liuyan[i].onclick=function(){
-			    			var j=this.index;
-			    			var num=parseInt(liuyan_num[j].innerText);		    			
-			    			msg[j].style.display='block';
-				    		fabu[j].style.display='block';
-				    		cancle[j].style.display='block';
-				    		box[j].style.top='194px';
-				    		var send=document.createElement('p');				    		
-		    				send.className='send';	
-				    		fabu[j].onclick=function(){
-				    			num+=1;
-				    			box[j].style.top='152px';
-					    		box[j].appendChild(send);
-					    		send.innerText=msg[j].value;
-					    		msg[j].value='';
-					    		wenzhang[j].style.marginBottom=(115+num*50)+'px';
-					    		send.style.marginTop=-(10-10*num)+'px';
-					    		send.style.top=(-40+num*40)+"px";
-					    		send.style.display='block';
-					    		msg[j].style.display='none';
-					    		fabu[j].style.display='none';
-					    		cancle[j].style.display='none';   
-					    		liuyan_num[j].innerText=num; 
-					    		sessionStorage.a=show.innerHTML;	
-				    		};
-				    		cancle[j].onclick=function(){
-					    		msg[j].value='';
-					    		box[j].style.top='152px';
-					    		msg[j].style.display='none';
-					    		fabu[j].style.display='none';
-						    	cancle[j].style.display='none'; 
-						    	sessionStorage.a=show.innerHTML;  
-				    		};
-			    			sessionStorage.a=show.innerHTML;
-			    		}
-					}
-				}
-			}	
+				// 计算文章内容字数
+				document.querySelector('#content').onkeyup=function(){
+					var get_value=document.querySelector('#content').value;
+					var remain=document.querySelector('#remain').innerText;
+					remain=parseInt(remain);
+					remain=100-get_value.length;				
+					if (remain<0) {
+						document.querySelector('#content').value=get_value.substr(0,100);
+					}else{
+						document.querySelector('#remain').innerText=remain;
+					}				
+				};
 
-			// 计算文章内容字数
-			document.querySelector('#content').onkeyup=function(){
-				var get_value=document.querySelector('#content').value;
-				var remain=document.querySelector('#remain').innerText;
-				remain=parseInt(remain);
-				remain=100-get_value.length;				
-				if (remain<0) {
-					document.querySelector('#content').value=get_value.substr(0,100);
-				}else{
-					document.querySelector('#remain').innerText=remain;
-				}				
-			};
-
-			// 提交文章内容
-			var submit=document.querySelector('#submit');
-			submit.onclick=function(){	
-				sessionStorage.a=document.querySelector('#content').value;   // sessionStorage保存
-				var li=document.createElement('li'); 
-				var mysuccess=document.getElementById('mysuccess');
-				var value=trim(document.querySelector('#content').value);				
-				if (!value) {
-					mysuccess.innerHTML='没有内容';
-            		mysuccess.style.display='block';
-				}else{	
-					show.insertBefore(li,show.childNodes[0]);
-					li.innerText=sessionStorage.getItem("a");
-					run(li,'width','600',function(){
-					run(li,'opacity',100)
-					});
-					// 添加文章
-					var plist=document.createElement('p');
-					var liuyan=document.createElement('span');
-					var liuyan_num=document.createElement('span');
-					var dianzan_num=document.createElement('span');
-					var dianzan=document.createElement('span');
-					li.appendChild(plist);
-					li.className='wenzhang';				
-					liuyan.className='glyphicon glyphicon-edit';				
-					dianzan.className='glyphicon glyphicon-heart';	
-					liuyan_num.className='liuyan_num';	
-					dianzan_num.className='dianzan_num';											
-					plist.appendChild(liuyan);
-					plist.appendChild(dianzan_num);
-					dianzan_num.innerText='0';
-					plist.appendChild(dianzan);
-					plist.appendChild(liuyan_num);
-					liuyan_num.innerText='0';
-					//留言板	
-					//1.添加留言
-					var msg=document.createElement('input');
-	 				var fabu=document.createElement('em');
-					var cancle=document.createElement('em');
-					li.appendChild(msg);
-					li.appendChild(fabu);
-					li.appendChild(cancle);
-					msg.className='msg';
-					fabu.className='fabu';
-					cancle.className='cancle';
-					msg.placeholder='写点什么...';
-					fabu.innerHTML='发布';
-					cancle.innerHTML='取消';
-					//2.发表留言
-					var liuyan=document.querySelector('.glyphicon-edit');
-					var fabu=document.querySelector('.fabu');
-					var cancle=document.querySelector('.cancle');
-					var box=document.createElement('div');
-					box.className='box';
-					li.appendChild(box);
-			    	var num=0;
-			    	liuyan.onclick=function(){
-			    		var send=document.createElement('p');				    		
-			    		send.className='send';				    		
-				    	fabu.onclick=function () {			    	
-				    		box.style.top='152px';
-				    		box.appendChild(send);
-				    		send.innerText=msg.value;
-				    		msg.value='';
-				    		li.style.marginBottom=(115+num*50)+'px';
-				    		send.style.marginTop=-(10-10*num)+'px';
-				    		send.style.top=(-40+num*40)+"px";
-				    		send.style.display='block';
-				    		msg.style.display='none';
-				    		fabu.style.display='none';
-				    		cancle.style.display='none';   
-				    		liuyan_num.innerText=num; 	
-				    	};
-				    	cancle.onclick=function(){
-				    		num-=1;
-				    		liuyan_num.innerText=num;
-				    		msg.value='';
-				    		box.style.top='152px';
-				    		msg.style.display='none';
-				    		fabu.style.display='none';
-					    	cancle.style.display='none';   
-			    		};
-				    };			    	
-			    	window.location.reload();			    
+				// 提交文章内容
+				var submit=document.querySelector('#submit');
+				submit.onclick=function(){	
+					sessionStorage.a=document.querySelector('#content').value;   // sessionStorage保存
+					var li=document.createElement('li'); 
+					var mysuccess=document.getElementById('mysuccess');
+					var value=trim(document.querySelector('#content').value);				
+					if (!value) {
+						mysuccess.innerHTML='没有内容';
+				mysuccess.style.display='block';
+					}else{	
+						show.insertBefore(li,show.childNodes[0]);
+						li.innerText=sessionStorage.getItem("a");
+						run(li,'width','600',function(){
+						run(li,'opacity',100)
+						});
+						// 添加文章
+						var plist=document.createElement('p');
+						var liuyan=document.createElement('span');
+						var liuyan_num=document.createElement('span');
+						var dianzan_num=document.createElement('span');
+						var dianzan=document.createElement('span');
+						li.appendChild(plist);
+						li.className='wenzhang';				
+						liuyan.className='glyphicon glyphicon-edit';				
+						dianzan.className='glyphicon glyphicon-heart';	
+						liuyan_num.className='liuyan_num';	
+						dianzan_num.className='dianzan_num';											
+						plist.appendChild(liuyan);
+						plist.appendChild(dianzan_num);
+						dianzan_num.innerText='0';
+						plist.appendChild(dianzan);
+						plist.appendChild(liuyan_num);
+						liuyan_num.innerText='0';
+						//留言板	
+						//1.添加留言
+						var msg=document.createElement('input');
+						var fabu=document.createElement('em');
+						var cancle=document.createElement('em');
+						li.appendChild(msg);
+						li.appendChild(fabu);
+						li.appendChild(cancle);
+						msg.className='msg';
+						fabu.className='fabu';
+						cancle.className='cancle';
+						msg.placeholder='写点什么...';
+						fabu.innerHTML='发布';
+						cancle.innerHTML='取消';
+						//2.发表留言
+						var liuyan=document.querySelector('.glyphicon-edit');
+						var fabu=document.querySelector('.fabu');
+						var cancle=document.querySelector('.cancle');
+						var box=document.createElement('div');
+						box.className='box';
+						li.appendChild(box);
+					var num=0;
+					liuyan.onclick=function(){
+						var send=document.createElement('p');				    		
+						send.className='send';				    		
+						fabu.onclick=function () {			    	
+							box.style.top='152px';
+							box.appendChild(send);
+							send.innerText=msg.value;
+							msg.value='';
+							li.style.marginBottom=(115+num*50)+'px';
+							send.style.marginTop=-(10-10*num)+'px';
+							send.style.top=(-40+num*40)+"px";
+							send.style.display='block';
+							msg.style.display='none';
+							fabu.style.display='none';
+							cancle.style.display='none';   
+							liuyan_num.innerText=num; 	
+						};
+						cancle.onclick=function(){
+							num-=1;
+							liuyan_num.innerText=num;
+							msg.value='';
+							box.style.top='152px';
+							msg.style.display='none';
+							fabu.style.display='none';
+							cancle.style.display='none';   
+						};
+					    };			    	
+					window.location.reload();			    
+					}
+				// 存储sessionStorage
+					sessionStorage.a=show.innerHTML;				
 				}
-	    		// 存储sessionStorage
-				sessionStorage.a=show.innerHTML;				
+			    }
 			}
+			IEVersion()			
 		}		 
 	</script>
 </head>
