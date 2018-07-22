@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no">
 	<title></title>
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="clearCSS.css">
@@ -262,6 +263,127 @@
 			left:0;
 			display: none;
 			border-radius: 5px;
+		}
+		/*响应式*/
+
+		@media only screen and (max-width: 1220px) {
+			#left #music ul li audio{
+	        	width: 200px;
+	        }
+    		#left #write #content{
+				margin: 50px 50px;
+				max-width: 280px;
+			}
+			#left ul li{
+				margin:3px 40px;
+				height:35px;
+				font-size:20px;
+				line-height:35px;
+			}
+			
+		}
+
+		@media only screen and (max-width: 950px) {
+
+			#left{
+				width:100%;
+				height: 45%;
+			}
+			#right{
+				width:100%;
+				height: 55%;
+			}
+			#left ul{
+				height: 20%;	
+			}
+			#left ul li{
+				margin:8px 125px;
+				height:45px;
+				font-size:30px;
+				line-height:45px;
+			}
+			#left #write{
+				height:80%;
+				position:absolute;
+				top:70px;
+			}
+			#left #write #content{
+				margin:10px 50px;
+				max-width:500px;
+				height:150px;
+
+			}
+			#left #write #submit{
+				top:165px;
+				right:280px;
+			}
+			#left #write #total_num{
+				top:170px;
+				right:363px;
+			}
+			#right ul{
+				margin:50px 50px;
+			}
+
+			#left #music{
+				height:80%;
+				position: absolute;
+			}
+			#left #music ul li audio{
+				width: 300px;
+				margin-top:53px;
+			}
+			#left #music ul li{
+				margin:30px auto;
+			}
+			#left #music ul li .ikonmusic{
+				top:200px;
+				left:100px;
+			}
+			#left #music ul li img{
+				top:70px;
+				left: 100px;
+			}
+
+		}
+		@media only screen and (max-width: 660px) {
+			#left ul li{
+				margin:8px 80px;
+			}
+	   		#left #write #submit{
+				right:115px;
+			}
+			#left #write #total_num{
+				right:235px;
+			}
+			#right ul{
+				margin:50px 10px;
+			}
+		}
+		@media only screen and (max-width: 500px) {
+			#left ul li{
+				margin:8px 50px;
+			}
+			#left #music ul li img{
+				left:10px;
+			}
+			#left #music ul li{
+				margin:30px 10px;
+			}
+			#left #music ul li audio{
+				margin-left:80px;
+				width:200px;
+			}
+			#left #music ul li .ikonmusic{
+				left:10px;
+			}
+			#left #write #content{
+				margin:10px 10px;
+				max-width:350px;
+			}
+			#left #write #total_num{
+				right:195px;
+			}
 		}
 	</style>
 
